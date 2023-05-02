@@ -3,13 +3,13 @@
 */
 
 import { TyapiError } from "./error.core";
-import { TyapiService } from "./service.core";
+import { Service } from "./service.core";
 
 /**
  * Base element for the Core Library. It handles the life cycle of services.
  */
-export class TyapiContext {
-  private services: Map<string, TyapiService> = new Map()
+export class Context {
+  private services: Map<string, Service> = new Map()
 
   /** 
    * Returns a service loaded in the context.
@@ -37,7 +37,7 @@ export class TyapiContext {
    * @param serviceName - Key name to find a declared service in the context.
    * @param service - A Core Service to add in the context app.
    */
-  async mountService(serviceName: string, service: TyapiService) {
+  async mountService(serviceName: string, service: Service) {
     if (this.services.has(serviceName)) {
       throw new TyapiError("There is a service already loaded with the name: " + serviceName);
     }
