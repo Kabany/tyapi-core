@@ -9,6 +9,8 @@ import { Context } from "../context.core";
 import { Logger } from "../logger/logger.service";
 
 const ROUTES_KEY = "ROUTES";
+const PORT_KEY = "PORT";
+const HOST_KEY = "HOST";
 
 export interface RequestExtended extends express.Request {
   context?: Context
@@ -23,13 +25,20 @@ interface BaseResponse {
   success: boolean
 }
 
+interface ExpressServerConfiguration {
+  port: number,
+  host: string
+}
+
 /** Service to stylize the log output */
 export class ExpressServer extends Service {
   server: express.Express
 
-  constructor(routes: express.Router[], context: Context) {
+  constructor(config: ExpressServerConfiguration, routes: express.Router[], context: Context) {
     let map = new Map();
     map.set(ROUTES_KEY, routes);
+    map.set(PORT_KEY, config.port);
+    map.set(HOST_KEY, config.host);
     super(map, context);
     this.server = express();
   }
@@ -63,6 +72,9 @@ export class ExpressServer extends Service {
       req.service?.getLogger()?.error("Internal Server Error catched", err)
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ResponseFailure(req, -50, "Whops! Something went wrong!"))
     });
+    // listen port
+    this.server.listen({port: this.params.get(PORT_KEY) as number, host: this.params.get(HOST_KEY)});
+    this.getLogger()?.info("Express Service", `Running at http://${this.params.get(HOST_KEY)}:${this.params.get(PORT_KEY)}`)
   }
 
   /** 

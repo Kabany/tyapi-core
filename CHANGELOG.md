@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 <!-- ## [Unreleased] -->
+## [1.1.1] - 2023-05-14
+### Fixed
+- Express Service: Constructor modified to require `port` and `host` parameters to start the express app in the `onMount()` lifecycle.
+
 ## [1.1.0] - 2023-05-03
 ### Added
 - Logger Service: Service to handle log events that can print on the console. In the future it will print log events on files.

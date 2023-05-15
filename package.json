@@ -1,6 +1,6 @@
 {
   "name": "tyapi-core",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Another Typescript NodeJS API Library for a RESTful backend. TyAPI Core is a set of common scripts for reusable code.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
