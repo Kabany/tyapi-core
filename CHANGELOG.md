@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.0] - 2023-05-03
 ### Added
 - Logger Service: Service to handle log events that can print on the console. In the future it will print log events on files.
+- Express Service: Service to handle and create the HTTP requests.
 
 ## [1.0.0] - 2023-04-02
 ### Added
