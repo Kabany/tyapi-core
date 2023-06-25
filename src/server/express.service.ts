@@ -33,6 +33,7 @@ interface ExpressServerConfiguration {
 /** Service to stylize the log output */
 export class ExpressServer extends Service {
   server: express.Express
+  private instanceServer: any
 
   constructor(config: ExpressServerConfiguration, routes: express.Router[], context: Context) {
     let map = new Map();
@@ -73,8 +74,16 @@ export class ExpressServer extends Service {
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ResponseFailure(req, -50, "Whops! Something went wrong!"))
     });
     // listen port
-    this.server.listen({port: this.params.get(PORT_KEY) as number, host: this.params.get(HOST_KEY)});
+    this.instanceServer = this.server.listen({port: this.params.get(PORT_KEY) as number, host: this.params.get(HOST_KEY)});
     this.getLogger()?.info("Express Service", `Running at http://${this.params.get(HOST_KEY)}:${this.params.get(PORT_KEY)}`)
+  }
+
+  async onUnmount() {
+    await (new Promise<void>((resolve, reject) => {
+      this.instanceServer?.close(() => {
+        resolve()
+      })
+    }))
   }
 
   /** 

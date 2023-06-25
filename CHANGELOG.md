@@ -5,9 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 <!-- ## [Unreleased] -->
+
+## [1.1.2] - 2023-06-25
+### Fixed
+- Express Service: Handle `onUnmount()` step to close express server main loop.
+
 ## [1.1.1] - 2023-05-14
 ### Fixed
-- Express Service: Constructor modified to require `port` and `host` parameters to start the express app in the `onMount()` lifecycle.
+- Express Service: Constructor modified to require `port` and `host` parameters to start the express app in the `onMount()` step.
 
 ## [1.1.0] - 2023-05-03
 ### Added

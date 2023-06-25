@@ -4,4 +4,4 @@ export { TyapiError } from "./error.core"
 
 export { Logger, LoggerMode } from "./logger/logger.service"
 
-export { ExpressServer } from "./server/express.service"
+export { ExpressServer, RequestExtended, ResponseFailure, ResponseSuccess } from "./server/express.service"
